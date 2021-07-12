@@ -10,6 +10,7 @@ const Shop = () => {
     // const first10 = fakeData.slice(0,10)
     const [products, setProducts] = useState([])
     const [cart, setCart] = useState([]);
+    const [search , setSearch] = useState('');
 
     useEffect(() => {
         fetch('https://serene-spire-26496.herokuapp.com/products')
@@ -51,10 +52,17 @@ const Shop = () => {
 
         addToDatabaseCart(product.key, count);
     }
+
+    const handleSearch = e => {
+        setSearch(e.target.value);
+    }
+    console.log(search)
+
     
     return (
         <div className="twin-container">
             <div className="product-container">
+                <input type="text" onBlur={handleSearch} placeholder="Search products here..." className="product-search" />
                 {
                     products.map(pd => <Product 
                         key={pd.key}
